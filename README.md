@@ -1,3 +1,8 @@
+# Sample repo showing a problem with temporal heartbeats
+
+see https://github.com/temporalio/sdk-java/issues/1965
+
+
 # Temporal Java SDK Samples
 
 This repository contains samples that demonstrate various capabilities of 
