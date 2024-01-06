@@ -44,10 +44,6 @@ dependencies {
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
     testRuntimeOnly "org.junit.vintage:junit-vintage-engine"
 
-    dependencies {
-        errorproneJavac('com.google.errorprone:javac:9+181-r4173-1')
-        errorprone('com.google.errorprone:error_prone_core:2.23.0')
-    }
 }
 
 task execute(type: JavaExec) {

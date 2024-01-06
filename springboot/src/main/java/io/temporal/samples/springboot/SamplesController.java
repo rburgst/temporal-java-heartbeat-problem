@@ -28,6 +28,7 @@ import io.temporal.samples.springboot.customize.CustomizeWorkflow;
 import io.temporal.samples.springboot.hello.HelloWorkflow;
 import io.temporal.samples.springboot.hello.model.Person;
 import io.temporal.samples.springboot.kafka.MessageWorkflow;
+import io.temporal.samples.springboot.propagation.ChunkedWorkflow;
 import io.temporal.samples.springboot.update.PurchaseWorkflow;
 import io.temporal.samples.springboot.update.model.ProductRepository;
 import io.temporal.samples.springboot.update.model.Purchase;
@@ -67,6 +68,23 @@ public class SamplesController {
 
     // bypass thymeleaf, don't return template name just result
     return new ResponseEntity<>("\"" + workflow.sayHello(person) + "\"", HttpStatus.OK);
+  }
+
+  @PostMapping(
+      value = "/propagate",
+      consumes = {MediaType.APPLICATION_JSON_VALUE},
+      produces = {MediaType.TEXT_HTML_VALUE})
+  ResponseEntity propagateSample() {
+    ChunkedWorkflow workflow =
+        client.newWorkflowStub(
+            ChunkedWorkflow.class,
+            WorkflowOptions.newBuilder()
+                .setTaskQueue("RowTaskQueue")
+                .setWorkflowId("Propagation")
+                .build());
+
+    // bypass thymeleaf, don't return template name just result
+    return new ResponseEntity<>("\"" + workflow.propagate() + "\"", HttpStatus.OK);
   }
 
   @GetMapping("/metrics")

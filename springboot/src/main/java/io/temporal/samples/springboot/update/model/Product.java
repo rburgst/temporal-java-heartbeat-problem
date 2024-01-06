@@ -19,7 +19,8 @@
 
 package io.temporal.samples.springboot.update.model;
 
-import javax.persistence.*;
+
+import jakarta.persistence.*;
 
 @Entity
 public class Product {

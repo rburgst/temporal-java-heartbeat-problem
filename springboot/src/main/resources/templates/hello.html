@@ -7,15 +7,15 @@
         <div class="card-body">
             <h4 class="card-title" th:text="'Temporal Java SDK Samples: ' + ${sample}">Temporal Java SDK Samples</h4>
             <h6>This is a simple greeting example. Enter persons first and last name then submit form to start
-            workflow execution. Results will be updated on the page.</h6>
+                workflow execution. Results will be updated on the page.</h6>
             <div class="form-group">
                 <br/><br/><br/>
                 <h5>Say hello to:</h5>
-                <form action="/hello", id="sampleform">
+                <form action="/propagate" , id="sampleform">
                     <p>First Name: <input type="text" name="firstName"/></p>
                     <p>Last Name: <input type="text" name="lastName"/></p>
-                    <p><input type="submit" value="Run Workflow" class="btn btn-primary" />
-                        <input type="reset" value="Reset Form" class="btn btn-secondary" />
+                    <p><input type="submit" value="Run Workflow" class="btn btn-primary"/>
+                        <input type="reset" value="Reset Form" class="btn btn-secondary"/>
                 </form>
             </div>
         </div>
@@ -28,28 +28,28 @@
     </div>
 </div>
 <script>
-$("#sampleform").submit(function( event ) {
-    event.preventDefault();
+    $("#sampleform").submit(function (event) {
+        event.preventDefault();
 
-    var $form = $( this ),
-        firstName = $form.find( "input[name='firstName']" ).val(),
-        lastName = $form.find( "input[name='lastName']" ).val(),
-        url = $form.attr( "action" );
+        var $form = $(this),
+            firstName = $form.find("input[name='firstName']").val(),
+            lastName = $form.find("input[name='lastName']").val(),
+            url = $form.attr("action");
 
-    $.ajax({
-        'url': url,
-        'method':'POST',
-        'dataType': 'json',
-        'contentType': 'application/json',
-        'data':JSON.stringify({
-            "firstName": firstName,
-            "lastName": lastName
-        }),
-        success: function(response) {
-            $( "#result" ).empty().append( response );
-        }
+        $.ajax({
+            'url': url,
+            'method': 'POST',
+            'dataType': 'json',
+            'contentType': 'application/json',
+            'data': JSON.stringify({
+                "firstName": firstName,
+                "lastName": lastName
+            }),
+            success: function (response) {
+                $("#result").empty().append(response);
+            }
+        });
     });
-});
 </script>
 <footer th:replace="fragments :: samples-footer"></footer>
 </body>
